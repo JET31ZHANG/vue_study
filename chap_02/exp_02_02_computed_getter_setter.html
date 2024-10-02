@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 通过单击按钮重新为计算属性赋值 -->
+    <div id="app">
+        <!-- 通用计算属性的 getter 方法获取计算属性值 -->
+        姓名：{{ fullName }}<br>
+         <!-- v-on 指令给 HTML 添加一个事件监听器，将在后续章节讲解 -->
+        <button v-on:click="changeName">修改计算属性</button>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const CounterApp = {
+            data() {
+                return {
+                    firstName: '陈',
+                    lastName: '恒'
+                }
+            },
+            methods: {                      // 方法定义
+                changeName() {
+                    // 计算属性可使用 this 引用，当计算属性 fullName 的值发生变化时调用 setter 方法
+                    this.fullName = '张 三'
+                }
+            },
+            computed: {                     // 计算属性
+                fullName: {
+                    get() {
+                        return this.firstName + this.lastName
+                    },
+                    set(newValue) {
+                        var name = newValue.split(' ')
+                        this.firstName = name[0]
+                        this.lastName = name[1]
+                    }
+                }
+            }
+        }
+        Vue.createApp(CounterApp).mount('#app')
+    </script>
+</body>
+</html>

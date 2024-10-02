@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="watch-example">
+        <p>
+            请问一个问题，包含英文字符？
+            <input v-model="question">
+        </p>
+        <p>{{ answer }}</p>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/axios.min.js"></script>
+    <script>
+        const WatchExampleVM = Vue.createApp({
+            data() {
+                return {
+                    question: '',
+                    answer: '这是一个好问题'
+                }
+            },
+            watch: {        // watch 选项提供监听数据属性的方法
+                // question 方法名与数据属性名 question 一致
+                question(newQuestion, oldQuestion) {    // newQuestion 是改变的值，oldQuestion 是没改变的值
+                    if(newQuestion.indexOf('?') > -1)
+                        this.getAnswer()                // 包含英文字符 ? 时执行 getAnswer() 方法
+                }
+            },
+            methods: {
+                getAnswer() {
+                    this.answer = '让我想一想'          // 设置中间状态，即答案返回前
+                    axios
+                    .get('https://yesno.wtf/api')       // 使用 axios 实现 AJAX 异步请求
+                    .then(response => {   
+                        this.answer = response.data.answer
+                    })
+                    .catch(error => {
+                        this.answer = '错误, 不能访问API.' + error
+                    })
+                }
+
+            }
+        }).mount('#watch-example')
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="counter" class="demo">
+        <!-- 通过模板获取变量 counter 的值 -->
+         {{ counter }}
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const CounterApp = {
+            data() {
+                return {
+                    counter: 0
+                }
+            },
+            mounted () {
+                setInterval(() => {
+                    this.counter++;
+                }, 100)
+            }
+        }
+        Vue.createApp(CounterApp).mount('#counter');
+    </script>
+    <style>
+        .demo {
+            font-family: sans-serif;
+        }
+    </style>
+</body>
+</html>
