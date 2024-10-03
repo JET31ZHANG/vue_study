@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 演示 v-if 与 v-show 的区别 -->
+    <div id="event-handling">
+        <div v-if="flag">一直显示</div>
+        <div v-show="flag">反复无常</div>
+        <!-- v-on:click 调用事件方法， v-on: 可缩写为 @ -->
+        <button @click="flag=!flag">隐藏/显示</button>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    flag: true
+                }
+            }
+        }).mount('#event-handling')
+    </script>
+</body>
+</html>

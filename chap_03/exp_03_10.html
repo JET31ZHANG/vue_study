@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 使用计算属性过滤与排序数组，并使用 v-for 指令渲染过滤与排序后的数组 -->
+    <div id="myfor">
+        偶数元素：
+        <ul>
+            <li v-for="n in myNumbers">
+                {{ n }}
+            </li>
+        </ul>
+        降序排序：
+        <ul>
+            <li v-for="m in yourNumbers">
+                {{ m }}
+            </li>
+        </ul>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    myData: [33, 44, 55, 66, 22]
+                }
+            },
+            computed: {
+                myNumbers() {
+                    // 遍历 myData, 并返回满足条件的值，放在一个数组中
+                    return this.myData.filter((number) => {
+                        return number % 2 === 0
+                    })
+                    // 等价于 return this.myData.filter(number => number % 2 === 0)
+                }, 
+                yourNumbers() {
+                    // 遍历 myData, 并返回降序后的数组，重写 sort 规则（降序）
+                    return this.myData.sort((number1, number2) => {
+                        if(number1 < number2)
+                            return 1
+                        else if(number1 === number2)
+                            return 0
+                        else 
+                            return -1
+                    })
+                }   
+            }
+        }).mount('#myfor')
+    </script>
+</body>
+</html>

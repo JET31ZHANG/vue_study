@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 使用 methods 过滤二维数组中大于 100 的元素，并使用嵌套 v-for 指令循环渲染过滤的结果 -->
+    <div id="myfor">
+        大于 100 的元素：
+        <ul v-for="numbers in myData">
+            <li v-for="n in myNumbers(numbers)">
+                {{ n }}
+            </li>
+        </ul>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    myData: [
+                        [111, 200, 300, 44, 55],
+                        [600, 7777, 88, 999, 10]
+                    ]
+                }
+            },
+            methods: {
+                // numbers = [111, 200, 300, 44, 55]
+                myNumbers(numbers) {
+                    return numbers.filter((number) => {
+                        return number > 100
+                    })
+                }
+            }
+        }).mount('#myfor')
+    </script>
+</body>
+</html>

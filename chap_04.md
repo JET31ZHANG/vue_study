@@ -2,6 +2,28 @@
 
 ## 注册
 
+```javascript
+        <div id="app">
+        	<component-a></component-a>
+        	<component-b></component-b> 
+        	<component-c></component-c> 
+    	</div>
+		// 全局注册的示例代码
+        const app = Vue.createApp({})
+        app.component('component-a', {
+            // 选项
+        })
+        app.component('component-b', {
+            // 选项
+        })
+        app.component('component-c', {
+            // 选项
+        })
+        app.mount('#app')
+```
+
+
+
 ## props 传递数据
 
 ## 通信

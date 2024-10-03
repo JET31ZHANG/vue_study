@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 将 methods 的返回值动态绑定到 class 属性 -->
+    <div id="vbind-class">
+        <div :class="myclasses()">使用 methods 绑定 class</div>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    size: 'your',
+                    myback: 'my'
+                }
+            },
+            methods: {
+                myclasses() {
+                    return this.size + " " + this.myback
+                }
+            }
+        }).mount('#vbind-class')
+    </script>
+    <style>
+        .my {
+            background-color: red;
+        } 
+        .your {
+            font-size: 20px;
+        }
+    </style>
+</body>
+</html>

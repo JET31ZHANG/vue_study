@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 阻止打开链接 -->
+    <div id="event-handling">
+        <a href="https://www.baidu.com/" @click="warn('考试期间禁止百度!', $event)">去百度</a>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        Vue.createApp({
+            methods: {
+                warn(message, event) {
+                    // event 访问原生的DOM事件
+                    event.preventDefault()
+                    alert(message)
+                }
+            }
+        }).mount('#event-handling')
+    </script>
+</body>
+</html>

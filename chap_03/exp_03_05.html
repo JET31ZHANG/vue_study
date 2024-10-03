@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 将 computed 属性值动态绑定到 style 属性 -->
+    <div id="vbind-style">
+        <!-- CSS 属性名可以使用驼峰式或短横线分隔来命名 -->
+        <div :style="mystyle">绑定内联样式</div>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        Vue.createApp({
+            computed: {
+                mystyle() {
+                    return ['color : red', 'fontSize: 30px']
+                }
+            }
+        }).mount('#vbind-style')
+    </script>
+</body>
+</html>

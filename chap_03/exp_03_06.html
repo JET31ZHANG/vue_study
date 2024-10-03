@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 使用条件渲染指令判断成绩等级 -->
+    <div id="if-handling">
+        <div v-if="score >= 90">优秀</div>
+        <div v-else-if="score >= 80">良好</div>
+        <div v-else-if="score >= 70">中等</div>
+        <div v-else="score >= 60">及格</div>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    score: 87
+                }
+            }
+        }).mount('#if-handling')
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 绑定 style 的方法 -->
+    <div id="vbind-style">
+        <!-- CSS 属性名可以使用驼峰式或短横线分隔来命名 -->
+        <div :style="{'color' : activeColor, 'fontSize' : fontSize + 'px'}">绑定内联样式</div>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    activeColor : 'red',
+                    fontSize: 30
+                }
+            }
+        }).mount('#vbind-style')
+    </script>
+</body>
+</html>
