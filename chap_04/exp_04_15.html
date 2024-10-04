@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- ref 的用法，要求页面加载后焦点聚焦在自定义组件上 -->
+    <div id="app">
+        <input type="text"/><br><br>
+        <base-input></base-input><br><br>
+        <input type="text"/>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({})
+        app.component('base-input', {
+            // ref 引用子组件 usernameInput, 也可以直接用 HTML 元素(如input)
+            template: '<input ref="usernameInput">',
+            // 直接引用 HTML 元素 input
+            // template: '<input ref="input" />'
+            methods: {
+                focusInput() {
+                    this.$refs.usernameInput.focus()
+                    // this.$refs.input.focus()
+                }
+            },
+            mounted() {
+                // 页面加载后调用该函数
+                this.focusInput()
+            },
+            // 如果前面直接引用 HTML 元素 input，去掉此处子组件的定义
+            components: {
+                'usernameInput': {
+                    template: '<input type="text">'
+                }
+            }
+        })
+        app.mount('#app')
+    </script>
+</body>
+</html>

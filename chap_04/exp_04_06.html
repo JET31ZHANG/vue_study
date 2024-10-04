@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 子组件触发两个事件，分别实现字体变大和变小 -->
+    <template id="blog">
+        <!-- 0.1 是传递给父组件 blogApp 的数据，可以不填。 -->
+        <!-- 当在父组件监听这个事件时，可以通过 $event 访问该数据。 -->
+        <!-- 如果事件处理函数是一个方法，那么该数据将会作为一个参数传入该方法。（例如，onEnlargeText）-->
+        <h4>{{ id }} : {{ title }}</h4>
+        <button @click="$emit('enlarge-text', 0.1)">变大</button>
+        <button @click="$emit('ensmall-text', 0.1)">变小</button>
+    </template>
+    <div id="blog-post-demo">
+        <div v-bind:style="{ fontSize : postFontSize + 'em' }">
+            <!-- 将一个对象的所有属性作为 prop 传递给子组件，@父组件监听事件并更新 postFontSize 的值 -->
+            <!-- $event 接收子组件传递过来的数据 0.1 -->
+            <blog-post v-for="post in posts" v-bind="post" @ensmall-text="postFontSize -= $event" @enlarge-text="onEnlargeText"></blog-post>
+        </div>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const blogApp = Vue.createApp({
+            data() {
+                return {
+                    // posts 是对象数组
+                    posts: [
+                        { id : 1, title : 'My journey with Vue' },
+                        { id : 2, title : 'Blogging with Vue' },
+                        { id : 3, title : 'Why Vue is so fun' }
+                    ]
+                }
+            },
+            methods: {
+                onEnlargeText(enlargeAmount) {
+                    this.postFontSize += enlargeAmount
+                }
+            }
+        })
+        blogApp.component('blog-post', {
+            props: ['id', 'title'],
+            template: '#blog'
+        })
+        blogApp.mount('#blog-post-demo')
+    </script>
+</body>
+</html>

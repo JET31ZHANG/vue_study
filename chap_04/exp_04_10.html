@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 使用单插槽 slot 设置子组件的默认渲染内容 -->
+    <template id="child">
+        <slot>
+            <p>插槽内容，默认内容！</p>
+        </slot>
+    </template>
+    <div id="app">
+        <child-com>
+            <!-- 如果这里没有渲染内容，将渲染插槽中的默认内容 -->
+            <p>有我在 slot 就不显示！</p>
+        </child-com>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({})
+        app.component('child-com', {
+            template: '#child'
+        })
+        app.mount('#app')
+    </script>
+</body>
+</html>

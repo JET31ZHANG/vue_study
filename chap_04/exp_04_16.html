@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字输入框</title>
+</head>
+<body>
+    <!-- 正整数数字输入框组件 -->
+    <div id="app">
+        <input-number></input-number>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/private_chap_04/input-num.js"></script>
+    <script>
+        const app = Vue.createApp({
+            // 引用数字输入组件
+            components: {
+                'input-number': inputNumber
+            }
+        })
+        app.mount('#app')
+    </script>
+
+</body>
+</html>

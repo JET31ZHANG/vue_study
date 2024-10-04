@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 创建 Vue 实例为祖先组件，并使用 provide 提供一个数据给其子孙组件 inject  -->
+    <template id="son">
+        <div>{{ todos.length }}</div>
+        <!-- todo-son 是 todo-list 的私有组件 -->
+        <todo-son></todo-son>
+    </template>
+    <template id="grandson">
+        <div>
+            <!-- 使用注入的数据 -->
+            {{ todoLength }}
+        </div>
+    </template>
+    <div id="vmodel-post-demo">
+        <!-- 父组件 Vue 实例传递数据 todos 给子组件 todo-list -->
+        <todo-list :todos="todos"></todo-list>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    todos: ['Feed a cat', 'Buy tickets']
+                }
+            },
+            provide() {								// 祖先组件app提供一个数据todoLength
+                return {
+                    todoLength: this.todos.length
+                }
+            }
+        })
+        app.component('todo-list', {
+            props: ['todos'],
+            components: {							// 在父组件todo-list中定义子组件todo-son
+                'todo-son': {
+                    inject: ['todoLength'],			// 孙子组件注入数据todoLength供自己使用
+                    template: '#grandson'
+                }
+            },
+            template: '#son'
+        })
+        app.mount('#vmodel-post-demo')
+    </script>
+</body>
+</html>

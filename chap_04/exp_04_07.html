@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 使用 v-model 实现子组件向父组件传值，并实现双向绑定 -->
+    <!-- 具有双向绑定的 v-model 组件，需要满足
+    1. 接收一个 value 属性
+    2. 在有新的 value 时触发 input 事件 -->
+    <template id="custom">
+        <!-- 为了让子组件正常工作，子组件内的 <input> 必须将其 value 属性绑定到一个名为 modelValue 的 props 上，
+         在其 input 事件被触发时将新的值域通过自定义的 update:modelValue 事件传递 -->
+        <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" >
+    </template>
+    <div id="vmodel-post-demo">
+        {{ searchText }} <br>
+        <custom-input v-model="searchText"></custom-input><br>
+        <!-- 这两个子组件等价 -->
+        <custom-input :model-value="searchText" @update:model-value="searchText = $event"></custom-input>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const blogApp = Vue.createApp({
+            data() {
+                return {
+                    searchText : '陈恒'
+                }
+            }
+        })
+
+        blogApp.component('custom-input', {
+            props: ['modelValue'],
+            template: '#custom'
+        })
+
+        blogApp.mount('#vmodel-post-demo')
+    </script>
+</body>
+</html>

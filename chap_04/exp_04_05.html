@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 给组件的 props 提供带有验证需求的对象 -->
+    <template id="validate">
+        <div>
+            <h4>{{ num }}</h4>
+            <h4>{{ strnum }}</h4>
+            <h4>{{ isrequired }}</h4>
+            <h4>{{ numdefault }}</h4>
+            <h4>{{ objectdefault }}</h4>
+            <h4>{{ myfun }}</h4>
+        </div>
+    </template>
+    <div id="validate-post-demo">
+        <validate-post
+            :num="200"
+            :strnum="'sdf'"
+            :isrequired="'abc'"
+            :numdefault="300"
+            :objectdefault="{a: 'a'}"
+            :myfun="aaa">
+        </validate-post>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const messageApp = Vue.createApp({})
+        messageApp.component('validate-post', {
+            props: {
+                num: Number,
+                strnum: [String, Number],
+                isrequired: {
+                    type: String,
+                    required: true
+                },
+                numdefault: {
+                    type: Number,
+                    default: 100
+                },
+                objectdefault: {
+                    type: Object,
+                    default: (() => {
+                        return { message : 'hello' }
+                    })
+                },
+                myfun: {
+                    validator: ((value) => {
+                        return ['success', 'warning', 'danger'].indexOf(value) !== -1
+                    })
+                }
+            },
+            template: '#validate'
+        })
+        messageApp.mount('#validate-post-demo')
+    </script>
+</body>
+</html>

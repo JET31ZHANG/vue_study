@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 使用 mitt 新建一个中央事件总线 bus，然后分别创建两个 Vue 实例 buyer（买方） 和 seller（卖方）, 买卖双方互相通信 -->
+     <div id="buyer">
+        <h1>{{ message1 }}</h1>
+        <button @click="transferb">我是买方，向卖方传递信息</button>
+     </div>
+     <div id="seller">
+        <h1>{{ message2 }}</h1>
+        <button @click="transfers">我是卖方，向买方传递信息</button>
+     </div>
+     <script src="../js/vue.global.js"></script>
+     <script src="../js/private_chap_04/mitt.js"></script>
+     <script>
+        const bus = mitt()
+        // 买方
+        const buyer = Vue.createApp({
+            data() {
+                return {
+                    message1: ''
+                }
+            },
+            methods: {
+                transferb() {
+                    // 用 emit 触发事件传值
+                    bus.emit('on-message1', '来自买方的信息')
+                }
+            },
+            mounted() {
+                // 监听
+                bus.on('on-message2', (msg) => {
+                    this.message1 = msg
+                })
+            }
+        })
+        buyer.mount('#buyer')
+
+        // 卖方
+        const seller = Vue.createApp({
+            data() {
+                return {
+                    message2 : ''
+                }
+            },
+            methods: {
+                transfers() {
+                    // 用 emit 触发事件传值
+                    bus.emit('on-message2', '来自卖方的信息')
+                }
+            },
+            mounted() {
+                // 监听
+                bus.on('on-message1', (msg) => {
+                    this.message2 = msg
+                })
+            }
+        })
+        seller.mount('#seller')
+     </script>
+</body>
+</html>
