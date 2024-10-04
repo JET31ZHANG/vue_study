@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="partcomponents-demo">
+        <component-b></component-b>
+        <!-- component-a 失效 -->
+        <component-a></component-a>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const ComponentA = {
+            template: '<span>这是私有组件A!</span>'
+        }
+
+        const ComponentB = {
+            components: {
+                'component-a' : ComponentA
+            },
+            template: '<span>这是私有组件B!</span>'
+        }
+
+        // 创建一个 Vue 应用
+        const app = Vue.createApp({
+            components: {
+                'component-b': ComponentB
+            }
+        })
+
+        app.mount('#partcomponents-demo')
+    </script>
+</body>
+</html>
