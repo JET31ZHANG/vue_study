@@ -6,6 +6,36 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <!-- 过渡封装组件 <transition> 的用法 -->
+    <div id="app">
+        <button @click="show = !show">点我，我就渐渐离开、渐渐地来</button>
+        <transition name="fade">
+            <p v-show="show" :style="styleobj">动画实例</p>
+        </transition>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    show: true,
+                    styleobj: {
+                        FontSize: '30px',
+                        color: 'red'
+                    }
+                }
+            }
+        })
+
+        app.mount('#app')
+    </script>
+    <style>
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity 2s ease;
+        }
+        .fade-enter-from, .fade-leave-to {
+            opacity: 0;
+        }
+    </style>
 </body>
 </html>
