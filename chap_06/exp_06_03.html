@@ -6,6 +6,41 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <!-- 注册一个全局指令 v-time，在 v-time 的钩子函数 beforeMount 中
+    将指令表达式的值 binding.value 作为参数传入 Time.getFormatTime()方法得到格式化时间，
+    再通过 el.innerHTML 写入指令元素，并且每分钟触发一次定时器 el.timeout 更新时间，
+    同时在 v-time 的钩子函数 unmounted 中清除定时器。 -->
+    <div id="app">
+        <div v-time="nowTime"></div>
+        <div v-time="beforeTime"></div>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script src="../js/private_chap_06/time.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    nowTime: (new Date()).getTime(),        // nowTime 是目前的时间
+                    beforeTime: 1628407242588               // beforeTime 是 2021-08-08（固定时间）
+                }
+            }
+        })
+        app.directive('time', {
+            // 绑定一次性事件等初始化操作
+            beforeMount(el, binding) {
+                el.innerHTML = Time.getFormatTime(binding.value)
+                // 定时器每分钟更新一次
+                el.timeout = setInterval(() => {
+                    el.innerHTML = Time.getFormatTime(binding.value)
+                }, 60000)
+            },
+            // 解除相关绑定
+            unmounted(el) {
+                clearInterval(el, timeout)
+                delete el.timeout
+            }
+        })
+        app.mount('#app')
+    </script>
 </body>
 </html>

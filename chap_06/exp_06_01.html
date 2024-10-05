@@ -6,6 +6,19 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <!-- 自定义名为 v-focus 的指令，用于在输入元素 <input> (挂载绑定父组件调用 mounted 函数) 初始化时自动获得焦点 -->
+    <div id="app">
+        <input v-focus type="text" />
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({})
+        app.directive('focus', {
+            mounted(el) {
+                el.focus()
+            }
+        })
+        app.mount('#app')
+    </script>
 </body>
 </html>
