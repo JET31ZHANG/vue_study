@@ -7,6 +7,33 @@
 </head>
 <body>
     <!-- 随即添加和移除列表项 -->
-     
+    <div id="list-demo" class="demo">
+        <button @click="add">添加元素</button>
+        <button @click="remove">移除元素</button>
+        <transition-group name="list" tag="p">
+            <span v-for="item in items" :key="item" class="list-item">{{ item }}</span>
+        </transition-group>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+
+    </script>
+    <style>
+        .list-item {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .list-enter-active, 
+        .list-leave-active {
+            transition: all 3s;
+        }
+        
+        .list-enter,
+        .list-leave-to {
+            opacity: 0;
+            transition: translateY(30px);
+        }
+    </style>
 </body>
 </html>

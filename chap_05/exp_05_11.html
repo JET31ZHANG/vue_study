@@ -7,5 +7,35 @@
 </head>
 <body>
     <!-- 多维列表的过渡 -->
+    <div id="list-demo" class="demo">
+        <button @click="shuffle">多维列表变换</button>
+        <transition-group name="cell" tag="div" class="container">
+            <span v-for="cell in cells" :key="cell.id" class="cell">{{ cell.number }}</span>
+        </transition-group>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+
+    </script>
+    <style>
+        .container {
+            width: 270px;
+            margin-top: 10px;
+            line-height: 30px;
+            text-align: center;
+        }
+
+        .cell {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            outline: 1px solid #aaa;
+        }
+
+        /* 根据 <transition-group> 的 name 确定样式的名字 */
+        .cell-move {
+            transition: 3s;
+        }
+    </style>
 </body>
 </html>

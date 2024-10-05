@@ -9,6 +9,40 @@
     <!-- 列表的平滑过渡，在 exp_05_08.html 的基础上做如下改进：
     1. 增加 .list-move 样式，使元素在进入时实现过渡效果
     2. 在 .list-leave-active 中设置绝对定位，使元素在离开时实现过渡效果 -->
-    
+    <div id="list-demo" class="demo"></div>
+        <button @click="add">添加元素</button>
+        <button @click="remove">移除元素</button>
+        <transition-group name="list" tag="p">
+            <span v-for="item in items" :key="item" class="list-item">{{ item }}</span>
+        </transition-group>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        
+    </script>
+    <style>
+        .list-item {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        /* 添加 class: .list-move、 */
+        .list-move,
+        .list-enter-active, 
+        .list-leave-active {
+            transition: all 3s;
+        }
+
+        /* 添加 .list-leave-active 专属样式 */
+        .list-leave-active {
+            position: absolute;
+        }
+
+        .list-enter,
+        .list-leave-to {
+            opacity: 0;
+            transition: translateY(30px);
+        }
+    </style>
 </body>
 </html>
