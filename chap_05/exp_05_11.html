@@ -15,7 +15,26 @@
     </div>
     <script src="../js/vue.global.js"></script>
     <script>
-
+        const app = Vue.createApp({
+            data() {
+                return {
+                    cells: Array.apply(null, { length: 81 }).map((_, index) => {
+                        return {
+                            id: index,
+                            number: index % 9 + 1
+                        }
+                    })
+                }
+            },
+            methods: {
+                shuffle() {
+                    this.cells = this.cells.sort(() => {
+                        return Math.random() - 0.5
+                    })
+                }
+            }
+        })
+        app.mount('#list-demo')
     </script>
     <style>
         .container {

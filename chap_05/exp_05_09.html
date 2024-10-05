@@ -6,10 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- 列表的平滑过渡，在 exp_05_08.html 的基础上做如下改进：
-    1. 增加 .list-move 样式，使元素在进入时实现过渡效果
-    2. 在 .list-leave-active 中设置绝对定位，使元素在离开时实现过渡效果 -->
-    <div id="list-demo" class="demo"></div>
+    <div id="list-demo" class="demo">
         <button @click="add">添加元素</button>
         <button @click="remove">移除元素</button>
         <transition-group name="list" tag="p">
@@ -18,22 +15,42 @@
     </div>
     <script src="../js/vue.global.js"></script>
     <script>
-        
+        const app = Vue.createApp({
+            data() {
+                return {
+                    items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                    nextNum: 10
+                }
+            },
+            methods: {
+                randomIndex() {
+                    return Math.floor(Math.random() * this.items.length)
+                },
+                add() {
+                    this.items.splice(this.randomIndex(), 0, this.nextNum++)
+                },
+                remove() {
+                    this.items.splice(this.randomIndex(), 1)
+                }
+            }
+        })
+        app.mount('#list-demo')
     </script>
     <style>
+        /* 列表的平滑过渡，在 exp_05_08.html 的基础上做如下改进： */
         .list-item {
             display: inline-block;
             margin-right: 10px;
         }
 
-        /* 添加 class: .list-move、 */
+        /* 1. 增加 .list-move 样式，使元素在进入时实现过渡效果 */
         .list-move,
         .list-enter-active, 
         .list-leave-active {
             transition: all 3s;
         }
 
-        /* 添加 .list-leave-active 专属样式 */
+        /* 2. 在 .list-leave-active 中设置绝对定位，使元素在离开时实现过渡效果 */
         .list-leave-active {
             position: absolute;
         }
