@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- property 转化为 Proxy 对象 -->
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const data = {
+            uname: 'chenheng',
+            age: 90
+        }
+        const handler = {
+            get(target, name, receiver) {
+                alert('执行 get 方法')
+                // Reflect.get 方法查找并返回 target 对象的 name 属性
+                // 如果没有该属性，则返回 undefined
+                return Reflect.get(...arguments)
+            },
+            set(target, name, value, receiver) {
+                alert('执行 set 方法')
+                // Reflect.set 方法设置 target 对象的 name 属性等于 value
+                return Reflect.set(...arguments)
+            }
+        }
+        const proxy = new Proxy(data, handler)
+        alert(proxy.uname)          // 执行 get 方法
+        proxy.uname = 'hhhhh'       // 执行 set 方法
+        alert(proxy.uname)          // 执行 get 方法
+    </script>
+</body>
+</html>

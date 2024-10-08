@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 实现 exp_08_05.html 的功能，要求 setup 返回渲染函数 -->
+    <div id="app">
+        <setup-testing></setup-testing>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({})
+        app.component('setup-testing', {
+            setup() {
+                // 使用 ref 函数对值创建一个响应式引用，并返回一个具有 value 属性的对象
+                const readersNumber = Vue.ref(1000)
+                // reactive() 接收一个普通对象，然后返回该对象的响应式代理
+                const book = Vue.reactive({
+                    title : '好书'
+                })
+                // 返回渲染函数
+                return () => Vue.h('div', [
+                    readersNumber.value, 
+                    book.title
+                ])
+            }
+        })
+        app.mount('#app')
+    </script>
+</body>
+</html>

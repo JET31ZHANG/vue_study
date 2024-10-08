@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 返回一个默认不可手动修改的 ref 对象 -->
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const count = Vue.ref(1)
+        const plusOne = Vue.computed(() => count.value + 2)
+        // -> 打印出 3
+        console.log(plusOne.value)
+        // 错误
+        plusOne.value++
+    </script>
+</body>
+</html>

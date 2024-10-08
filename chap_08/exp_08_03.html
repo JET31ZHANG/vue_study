@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 在 setup 函数中参数 props 是响应式的 -->
+    <template id="stesting">{{ mybook }}</template>
+    <div id="app">
+        <setup-testing :abook="book"></setup-testing>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    book: {
+                        id: 1,
+                        title: 'My journey with Vue'
+                    }
+                }
+            }
+        })
+        app.component('setup-testing', {
+            props: ['abook'],
+            /*
+                props 是响应式的，不能使用 ES6 解构，那将会消除 props 的响应性
+                如果需要解构 props，可在 setup 函数中使用 toRefs 函数创建 props 的响应式应用
+            */
+            setup(props) {                      
+                console.log(props.abook.id)
+                mybook = props.abook
+                // 暴露给 template
+                return {
+                    mybook
+                }
+            },
+            template: '#stesting'
+        })
+        app.mount('#app')
+    </script>
+</body>
+</html>

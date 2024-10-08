@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 在父组件 app 中使用 provide 方法提供数据，
+     在子组件 setup-testing 中使用 inject 注入数据 -->
+    <template id="stesting">
+        {{ userLocation }} <br>
+        {{ userGeoLocation.longitude }}
+    </template>
+    <div id="app">
+        <setup-testing>
+            {{ userLocation }}
+        </setup-testing>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            setup() {
+                Vue.provide('location', 'North Pole')
+                Vue.provide('geolocation', {
+                    longitude: 90,
+                    latitude: 135
+                })
+            }
+        })
+        app.component('setup-testing', {
+            setup() {
+                const userLocation = Vue.inject('location', 'The Universe')
+                const userGeoLocation = Vue.inject('geolocation')
+                return {
+                    userLocation,
+                    userGeoLocation
+                }
+            },
+            template: '#stesting'
+        })
+        app.mount('#app')
+    </script>
+</body>
+</html>

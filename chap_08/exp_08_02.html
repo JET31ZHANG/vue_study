@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- reactive() 方法和 watchEffect() 方法的应用 -->
+    <script src="../js/vue.global.js"></script>
+    <script>
+        // reactive() 方法接收一个普通对象，然后返回该对象的响应式代理
+        let book = Vue.reactive({
+            title : 'SSM + Spring Boot + Vue.js 3 全栈开发从入门到实战（微课视频版）',
+            author: '陈恒'
+        })
+        // watchEffect() 方法监听数据变化，更新视图或调用函数
+        Vue.watchEffect(() => {
+            alert(book.title)
+        })
+        book.title = 'Vue.js 3 从入门到实战（微课视频版）'
+    </script>
+</body>
+</html>

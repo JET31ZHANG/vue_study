@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 返回一个可手动修改的 ref 对象  -->
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const count = Vue.ref(0)
+        const plusOne = Vue.computed({
+            get: () => count.value + 1,
+            set: (val) => {
+                count.value = val - 1
+            }
+        })
+        plusOne.value = 5
+        // -> 打印出 4
+        console.log(count.value)
+    </script>
+</body>
+</html>

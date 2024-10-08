@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 返回一个可手动修改的 ref 对象 -->
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const count = Vue.ref(0)
+        // -> 打印出 0
+        Vue.watchEffect(() => console.log(count.value))
+        setTimeout(() => {
+            // -> 打印出 1
+            count.value++
+        }, 1000)
+    </script>
+</body>
+</html>
