@@ -6,6 +6,25 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <!-- 在 render 函数中渲染一个按钮，并处理按钮事件 click -->
+    <div id="app">
+        <my-element></my-element>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({})
+        app.component('my-element', {
+            // 组件 my-element 的渲染函数的功能相当于模板的功能
+            render(h) {
+                return Vue.h('button', {
+                    innerText: '渲染一个按钮',
+                    onClick: function(event) {          // 监听 click 事件
+                        alert('测试 onClick 事件')
+                    }
+                })
+            }
+        })
+        app.mount('#app')
+    </script>
 </body>
 </html>

@@ -6,6 +6,39 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <!-- 在 render 函数中渲染一个输入框，
+     并使用 value 属性和 input 事件实现 v-model 的双向绑定 -->
+    <div id="app">
+        <my-element></my-element>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({})
+        app.component('my-element', {
+            data() {
+                return {
+                    value: '初始值'
+                }
+            },
+            // 组件 my-element 的渲染函数的功能相当于模板的功能
+            render(h) {
+                let that = this                                 // 为了防止 this 的指向发生改变
+                return Vue.h('div', [                           // children 参数
+                    // 渲染一个输入框，使用 value 属性和 input 事件实现 v-model 双向数据绑定
+                    Vue.h('input', {
+                        // 将 data 选项中的 value 变量绑定到 input 的 value 属性
+                        value: that.value,
+                        oninput: function(event) {              // 监听 input 事件
+                            // 当输入框数据变化时同步到组件的 data 选项中的 value 变量
+                            that.value = event.target.value
+                        } 
+                    }),
+                    // 渲染一个段落
+                    Vue.h('p', 'value' + that.value)
+                ])
+            }
+        })
+        app.mount('#app')
+    </script>
 </body>
 </html>

@@ -3,9 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Document/title>
 </head>
 <body>
-    
+    <!-- v-if 和 v-for 指令 在 render 中的替代方案 -->
+    <div id="app">
+        <my-element :items="items"></my-element>
+        <button @click="handleClick">显示列表</button>
+    </div>
+    <script src="../js/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    items: []
+                }
+            },
+            methods: {
+                handleClick: function() {
+                    this.items = [
+                        'Java Web 开发从入门到实践',
+                        'Java EE 框架整合开发入门到实践',
+                        'Spring Boot 从入门到实践',
+                        'SSM + Spring Boot + Vue.js 3 全栈开发从入门到实战',
+                        'Vue.js 3 从入门到实战'
+                    ]
+                }
+            }
+        })
+        app.component('my-element', {
+            render() {
+                // items 不能为空
+                if(this.items.length)
+                    // 渲染 <ul> 元素
+                    return Vue.h('ul', this.items.map((item) => {
+                        // 使用数组的 map 方法渲染列表项 <li>
+                        return Vue.h('li', item)    
+                    })) 
+                else    // items 为空，渲染一个“列表为空”的<p>元素
+                    return Vue.h('p', '列表为空')
+            },
+            props: ['items']
+        })
+        app.mount('#app')
+    </script>
 </body>
 </html>
