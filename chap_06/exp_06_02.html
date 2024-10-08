@@ -22,6 +22,8 @@
         })
         app.directive('demo', {
             beforeMount(el, binding, vnode) {
+                // 测试 binding 的属性
+                // alert(Object.keys(binding))
                 const keys = []
                 for (const i in vnode) 
                     keys.push(i)
