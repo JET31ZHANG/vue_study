@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- 在 Vue 实例中的 computed 选项中定义了计算属性，
+     计算属性都是以方法（函数）的形式定义，但仅当作属性来使用 -->
     <div id="myComputed">{{ textShow }}</div>
     <script src="../js/vue.global.js"></script>
     <script>
@@ -16,6 +18,7 @@
                 }
             },
             computed: {
+                // 计算属性 textShow
                 textShow() {
                     return this.textData.split(',').reverse().splice(0, 1)
                 }
