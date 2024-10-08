@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- 使用时钟函数 setInterval 演示响应式程序 -->
     <div id="counter" class="demo">
         <!-- 通过模板获取变量 counter 的值 -->
          {{ counter }}
@@ -14,10 +15,18 @@
     <script>
         const CounterApp = {
             data() {
-                return {
+                return {    
+                    /* 
+                     * 声明需要响应式绑定的数据对象，
+                     * 若定义多个键值对，之间用逗号分隔
+                    */
                     counter: 0
                 }
             },
+            /*
+             * mounted 是一个钩子函数，在挂载到实例上后（初始化页面后）调用该函数，
+             * 一般是第一个业务逻辑在这里开始
+            */ 
             mounted () {
                 setInterval(() => {
                     this.counter++;

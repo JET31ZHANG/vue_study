@@ -6,20 +6,20 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- 引入 Vue.js -->
     <div id="hello-vue" class="demo">{{ message }}</div>
     <script src="../js/vue.global.js"></script>
     <script>
         const HelloVueApp = {
-            data () {
+            data () {   // Vue 实例的数据对象，ES 语法，等价于 data: function(){}
                 return {
                     message: 'Hello Vue!!'
                 }
             }
         }
-
+        // 每个 Vue.js 应用都是通过用 createApp 函数创建一个新的应用实例开始
+        // mount 函数把一个 Vue.js 应用实例挂载到 <div id="hello-vue"></div>上
         Vue.createApp(HelloVueApp).mount('#hello-vue');
-
-
     </script>
     <style>
         .demo {
