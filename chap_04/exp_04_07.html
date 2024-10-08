@@ -19,7 +19,9 @@
         {{ searchText }} <br>
         <custom-input v-model="searchText"></custom-input><br>
         <!-- 这两个子组件等价 -->
-        <custom-input :model-value="searchText" @update:model-value="searchText = $event"></custom-input>
+        <custom-input :model-value="searchText" 
+                        @update:model-value="searchText = $event">
+        </custom-input>
     </div>
     <script src="../js/vue.global.js"></script>
     <script>

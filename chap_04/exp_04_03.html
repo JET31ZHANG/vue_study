@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- 构造两个数组 props 来声明从父组件接收的数据，
+     props 的值可以是字符串数组，也可以是对象。 -->
     <!-- 父组件显示 -->
     <template id="parent">
         <h4>{{ message }}</h4>
@@ -45,6 +47,7 @@
             },
             template: '#parent'
         })
+
         messageApp.mount('#message-post-demo')
     </script>
 </body>

@@ -34,7 +34,7 @@
             },
             mounted() {
                 // 监听
-                bus.on('on-message2', (msg) => {
+                bus.on('on-message2', (msg) => {    // (msg) 相当于 function(msg)
                     this.message1 = msg
                 })
             }
@@ -56,7 +56,7 @@
             },
             mounted() {
                 // 监听
-                bus.on('on-message1', (msg) => {
+                bus.on('on-message1', (msg) => {    // (msg) 相当于 function(msg)
                     this.message2 = msg
                 })
             }
