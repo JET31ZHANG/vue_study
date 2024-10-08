@@ -8,12 +8,20 @@
 <body>
     <!-- 多按钮间的过渡 -->
     <div id="app">
-        <button @click="handleClick('saved')">显示Edit</button>&nbsp;&nbsp;
-        <button @click="handleClick('edited')">显示Save</button>&nbsp;&nbsp;
-        <button @click="handleClick('editing')">显示Cancel</button><br><br>
+        <button @click="handleClick('saved')">
+            显示Edit
+        </button>&nbsp;&nbsp;
+        <button @click="handleClick('edited')">
+            显示Save
+        </button>&nbsp;&nbsp;
+        <button @click="handleClick('editing')">
+            显示Cancel
+        </button><br><br>
         <transition name="fade" mode="out-in">
             <!-- 这里使用 key 让 vue 区分相同标签名元素，触发过渡 -->
-            <button :key="docState">{{ buttonMessage }}</button>
+            <button :key="docState">
+                {{ buttonMessage }}
+            </button>
         </transition>
     </div>
     <script src="../js/vue.global.js"></script>
