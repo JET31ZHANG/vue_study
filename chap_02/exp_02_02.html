@@ -22,13 +22,16 @@
                     lastName: '恒'
                 }
             },
-            methods: {                      // 方法定义
+            methods: {      // 方法定义
                 changeName() {
-                    // 计算属性可使用 this 引用，当计算属性 fullName 的值发生变化时调用 setter 方法
+                    /* 
+                     * 计算属性可使用 this 引用，
+                     * 当计算属性 fullName 的值发生变化时调用 setter 方法
+                    */
                     this.fullName = '张 三'
                 }
             },
-            computed: {                     // 计算属性
+            computed: {     // 计算属性
                 fullName: {
                     get() {
                         return this.firstName + this.lastName
