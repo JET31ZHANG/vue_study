@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- 购物车实例： -->
+    <!-- （1）展示已加入购物车的商品列表，包括商品名称、商品单价、购买数量和实时购买的总价 -->
+    <!-- （2）购买数量可以增加或减少，每类商品还可以从购物车中删除 -->
     <div id="cart">
         <template v-if="cartList.length">
             <table>
@@ -39,69 +42,18 @@
         <div v-else>购物车为空</div>
     </div>
     <script src="../js/vue.global.js"></script>
-    <script>
-        Vue.createApp({
-            data() {
-                return {
-                    cartList: [
-                        {
-                            id: 1,
-                            gname: 'Spring Boot 从入门到实战',
-                            gprice: 79.8,
-                            count: 5
-                        },
-                        {
-                            id: 2,
-                            gname: 'Java Web开发从入门到实战',
-                            gprice: 69.8,
-                            count: 10
-                        },
-                        {
-                            id: 3,
-                            gname: 'Java EE框架整合开发入门到实战',
-                            gprice: 69.8,
-                            count: 100
-                        }
-                    ]
-                }
-            },
-            computed: {
-                totalPrice() {
-                    let total = 0
-                    for (var i = 0; i < this.cartList.length; i++) {
-                        var item = this.cartList[i]
-                        total = total + item.gprice * item.count
-                    }
-                    return total
-                }
-            },
-            methods: {
-                reduce(index) {
-                    if(this.cartList[index].count === 1)
-                        return
-                    this.cartList[index].count--
-                },
-                add(index) {
-                    this.cartList[index].count++
-                }, 
-                remove(index) {
-                    this.cartList.splice(index, 1)
-                },
-                removeAll() {
-                    this.cartList.splice(0, this.cartList.length)
-                }
-            }
-        }).mount('#cart')
-    </script>
+    <script src="../js/private_chap_03/cart.js"></script>
     <style>
         table {
             border: 1px solid #e9e9e9;
             border-collapse: collapse;
         }
+
         th, td {
             padding: 8px 16px;
             border: 1px solid #e9e9e9;
         }
+        
         th {
             background: #f7f7f7;
         }
