@@ -7,6 +7,7 @@
 </head>
 <body>
     <!-- 使用计算属性计算购物车商品总价 -->
+    <!-- 计算属性：以方法（函数）的形式定义，但仅当作属性来使用。 -->
     <div id="myCart">
         <!-- v-model 指令在表单元素上实现双向数据绑定，将在后续章节讲解 -->
         商品 1 数量：<input type="text" v-model="num1">
@@ -17,6 +18,14 @@
     </div>
     <script src="../js/vue.global.js"></script>
     <script>
+        /*
+        *   在一个计算属性中可完成各种复杂的逻辑，但最终必须返回一个结果。
+        *   计算属性的结果还可以依赖于多个数据，只要其中任一数据发生变化，
+        *   计算属性将重新执行，视图也会更新。
+        */
+        /*
+        *   商品数量和商品价格属性只要有一个发生变化，购物车商品总价属性都会自动更新。
+        */
         const CounterApp = {
             data () {
                 return {
@@ -26,9 +35,12 @@
                     price2 : 20
                 }
             },
+            /*
+            *   使用了计算属性的默认用法：使用 getter 方法来读取计算属性
+            */
             computed: {
                 total() {
-                    return this.num1*this.price1 + this.num2 * this.price2
+                    return this.num1 * this.price1 + this.num2 * this.price2
                 }
             }
         }

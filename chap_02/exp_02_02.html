@@ -22,20 +22,31 @@
                     lastName: '恒'
                 }
             },
-            methods: {      // 方法定义
+            methods: {      // 方法定义 
+                /*
+                *   单击“修改计算属性”按钮时，执行 changeName() 方法
+                */
                 changeName() {
                     /* 
                      * 计算属性可使用 this 引用，
                      * 当计算属性 fullName 的值发生变化时调用 setter 方法
                     */
+                    // 去调用计算属性 fullName 的 setter 方法
                     this.fullName = '张 三'
                 }
             },
+            /*
+            *   Vue 的每一个计算属性都包含一个 getter 方法和一个 setter 方法。
+            *   大多数情况，使用默认的 getter 方法读取计算属性的值即可，不必声明 setter 方法。
+            */
             computed: {     // 计算属性
                 fullName: {
+                    // 使用 getter 方法来读取计算属性
                     get() {
                         return this.firstName + this.lastName
                     },
+                    // 使用 setter 方法来修改计算属性
+                    // 数据 firstName 和 lastName 相继更新，视图同样也会更新
                     set(newValue) {
                         var name = newValue.split(' ')
                         this.firstName = name[0]
